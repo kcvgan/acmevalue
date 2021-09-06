@@ -63,12 +63,19 @@ const EditColumn = styled.div`
   cursor: pointer;
 `;
 
-const GreenCircle = styled.div`
+const Circle = styled.div`
   width: 16px;
   height: 16px;
   border-radius: 100%;
-  background-color: ${({ theme }) => theme.colors.green};
   margin: auto;
+`;
+
+const GreenCircle = styled(Circle)`
+  background-color: ${({ theme }) => theme.colors.success};
+`;
+
+const GrayCircle = styled(Circle)`
+  background-color: ${({ theme }) => theme.colors.grey.primary};
 `;
 
 type ContractsListProps = {
@@ -99,7 +106,7 @@ const ContractsList = ({
             <DateColumn>{contract.periodStart.toLocaleString()}</DateColumn>
             <DateColumn>{contract.periodEnd.toLocaleString()}</DateColumn>
             <ListColumn>
-              {contract.scheduledForRenewal ? <GreenCircle /> : null}
+              {contract.scheduledForRenewal ? <GreenCircle /> : <GrayCircle />}
             </ListColumn>
             <DateColumn>
               {contract.negotiationRenewalDate.toLocaleString()}
