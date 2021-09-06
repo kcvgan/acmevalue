@@ -21,3 +21,9 @@ export const Button = styled.button`
     opacity: 0.8;
   }
 `;
+
+export const SecondaryButton = styled(Button)`
+  background-color: transparent;
+  border: 1px solid ${({ theme }) => theme.colors.lightBlue};
+  color: ${({ theme }) => theme.colors.lightBlue};
+`;

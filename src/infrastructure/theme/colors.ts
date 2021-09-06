@@ -2,6 +2,7 @@ export const colors = {
   success: '#267c5d',
   error: '#fb7777',
   textDark: '#81848f',
+  white: '#fff',
   text: '#bdbec2',
   lightBlue: '#6787FF',
   blue: {

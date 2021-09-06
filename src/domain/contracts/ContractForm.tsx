@@ -5,8 +5,10 @@ import styled from 'styled-components';
 import { Contract } from './types/Contract';
 import LabeledInput from '../../ui/molecules/LabeledInput';
 import LabeledDatePicker from '../../ui/molecules/LabeledDatePicker';
-import { Button } from '../../ui/atoms/Button';
+import { Button, SecondaryButton } from '../../ui/atoms/Button';
 import Checkbox from '../../ui/atoms/Checkbox';
+import useRedirect from '../../infrastructure/utils/useRedirect';
+import { CONTRACTS_MAIN_ROUTE } from '../../application/router/routes';
 
 const FieldRow = styled.div`
   display: flex;
@@ -22,6 +24,10 @@ const FormControls = styled.div`
   width: 100%;
   justify-content: flex-end;
   margin-top: ${({ theme }) => theme.spacing.md};
+
+  ${SecondaryButton} {
+    margin-right: ${({ theme }) => theme.spacing.md};
+  }
 `;
 
 type ContractFormProps = {
@@ -40,6 +46,8 @@ const getInitialValues = (contract?: Contract) => ({
 type Inputs = Omit<Contract, 'contractId'>;
 
 const ContractForm = ({ onSubmit, contract }: ContractFormProps) => {
+  const returnToContracts = useRedirect(CONTRACTS_MAIN_ROUTE.path);
+
   const { register, handleSubmit, control, reset } = useForm<Inputs>({
     defaultValues: getInitialValues(contract),
   });
@@ -119,6 +127,9 @@ const ContractForm = ({ onSubmit, contract }: ContractFormProps) => {
       </FieldRow>
 
       <FormControls>
+        <SecondaryButton onClick={() => returnToContracts()}>
+          Cancel
+        </SecondaryButton>
         <Button type="submit" data-cy="submit-contract-form">
           Submit
         </Button>
