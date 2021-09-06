@@ -26,12 +26,7 @@ const LabeledDatePicker = ({
 }: LabeledDatePickerProps) => (
   <Container>
     <Label htmlFor={id}>{label}</Label>
-    <DatePicker
-      id={id}
-      {...props}
-      {...formHooks}
-      customInputRef={formHooks?.ref?.name}
-    />
+    <DatePicker id={id} {...props} customInputRef={formHooks?.ref?.name} />
   </Container>
 );
 

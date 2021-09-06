@@ -4,23 +4,17 @@ import styled from 'styled-components';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
-import { RefCallBack } from 'react-hook-form';
 import Input from './Input';
 
 const DatePickerContainer = styled.div`
   width: 100%;
 `;
 
-type DatePickerProps = ReactDatePickerProps<any> & {
-  formHookRef?: RefCallBack;
-};
+type DatePickerProps = ReactDatePickerProps<any>;
 
-const DatePicker = ({ formHookRef, ...datePickerProps }: DatePickerProps) => (
+const DatePicker = ({ ...datePickerProps }: DatePickerProps) => (
   <DatePickerContainer>
-    <ReactDatePicker
-      {...datePickerProps}
-      customInput={<Input ref={formHookRef} />}
-    />
+    <ReactDatePicker {...datePickerProps} customInput={<Input />} />
   </DatePickerContainer>
 );
 
