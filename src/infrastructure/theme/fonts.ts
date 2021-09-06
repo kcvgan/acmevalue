@@ -5,8 +5,9 @@ export const fonts = {
     bold: 700,
   },
   size: {
-    sm: '0.5rem',
+    small: '0.5rem',
     regular: '1rem',
-    large: '1.4rem',
+    medium: '1.2rem',
+    large: '1.8rem',
   },
 };
