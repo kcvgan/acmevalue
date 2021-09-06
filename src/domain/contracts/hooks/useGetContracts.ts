@@ -1,23 +1,22 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { Contract } from '../types/Contract';
-import contractsService from '../api/contractsService';
+import { fetchContracts, selectAllContracts } from '../store/contractsSlice';
 
 export const useGetContracts = () => {
-  const [contracts, setContracts] = useState<Contract[] | undefined>();
+  const contracts = useSelector(selectAllContracts);
+  const dispatch = useDispatch();
 
-  const fetchContracts = async () => {
-    const fetchedContracts = await contractsService.getContracts();
-
-    setContracts(fetchedContracts);
+  const getContracts = async () => {
+    await dispatch(fetchContracts());
   };
 
   useEffect(() => {
-    fetchContracts();
+    getContracts();
   }, []);
 
   return {
-    fetchContracts,
+    getContracts,
     contracts,
   };
 };

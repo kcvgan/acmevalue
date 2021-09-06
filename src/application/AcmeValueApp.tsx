@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import { Provider } from 'react-redux';
 
 import theme from '../infrastructure/theme';
 import AppShell from './AppShell';
+import store from './store/store';
 
 const GlobalStyles = createGlobalStyle`
   body {
@@ -21,7 +23,9 @@ const GlobalStyles = createGlobalStyle`
 const AcmeValueApp = () => (
   <ThemeProvider theme={theme}>
     <GlobalStyles />
-    <AppShell />
+    <Provider store={store}>
+      <AppShell />
+    </Provider>
   </ThemeProvider>
 );
 
