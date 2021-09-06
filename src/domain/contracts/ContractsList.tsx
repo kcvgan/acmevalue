@@ -93,7 +93,9 @@ const ContractsList = ({
       <List>
         {contracts.map((contract, index) => (
           <ListItem key={contract.contractId}>
-            <ListColumn>{contract.company}</ListColumn>
+            <ListColumn data-cy={`contract-company-cell-${index}`}>
+              {contract.company}
+            </ListColumn>
             <DateColumn>{contract.periodStart.toLocaleString()}</DateColumn>
             <DateColumn>{contract.periodEnd.toLocaleString()}</DateColumn>
             <ListColumn>

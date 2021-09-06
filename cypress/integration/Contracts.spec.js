@@ -1,6 +1,6 @@
 describe('Contracts manager', () => {
   it('Creates a new contract', () => {
-    cy.visit('/')
+    cy.visit('/contracts')
       .get('[data-cy=add-contract-button]')
       .click()
       .get('#company')
@@ -26,7 +26,7 @@ describe('Contracts manager', () => {
   });
 
   it('Updates an existing contract', () => {
-    cy.visit('/')
+    cy.visit('/contracts')
       .get('[data-cy=edit-contract-button-0]')
       .click()
       .get('#company')
@@ -48,7 +48,7 @@ describe('Contracts manager', () => {
       .click()
       .get('[data-cy=submit-contract-form]')
       .click()
-      .get('.sc-hKgJUU > :nth-child(1) > :nth-child(1)')
+      .get('[data-cy=contract-company-cell-0]')
       .should('contain', 'Cypress Inc');
   });
 });
