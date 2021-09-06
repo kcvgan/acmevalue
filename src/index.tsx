@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import AcmeValueApp from './application/AcmeValueApp';
 
 if (process.env.NODE_ENV === 'development') {
