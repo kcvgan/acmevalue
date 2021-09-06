@@ -1,8 +1,10 @@
 import React, { ComponentProps } from 'react';
 import styled from 'styled-components';
 import { RefCallBack } from 'react-hook-form';
+
 import DatePicker from '../atoms/DatePicker';
 import Label from '../atoms/Label';
+import InputErrorMessage from '../atoms/InputErrorMessage';
 
 const Container = styled.div`
   display: flex;
@@ -34,6 +36,7 @@ const LabeledDatePicker = ({
       {...props}
       customInputRef={formHooks?.ref?.name}
     />
+    <InputErrorMessage>{error}</InputErrorMessage>
   </Container>
 );
 

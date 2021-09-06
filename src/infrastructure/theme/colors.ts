@@ -1,9 +1,9 @@
 export const colors = {
   success: '#267c5d',
   error: '#fb7777',
-  textDark: '#81848f',
+  textDark: '#bdbec2',
   white: '#fff',
-  text: '#bdbec2',
+  text: '#81848f',
   lightBlue: '#6787FF',
   blue: {
     primary: '#6787FF',

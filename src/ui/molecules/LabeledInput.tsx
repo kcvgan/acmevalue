@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { ControllerRenderProps, UseFormRegisterReturn } from 'react-hook-form';
 import Label from '../atoms/Label';
 import Input from '../atoms/Input';
+import InputErrorMessage from '../atoms/InputErrorMessage';
 
 const Container = styled.div`
   display: flex;
@@ -27,6 +28,7 @@ const LabeledInput = ({
   <Container>
     <Label htmlFor={id}>{label}</Label>
     <Input id={id} {...props} error={error} {...formHooks} />
+    <InputErrorMessage>{error}</InputErrorMessage>
   </Container>
 );
 

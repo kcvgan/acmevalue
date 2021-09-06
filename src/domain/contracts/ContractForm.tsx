@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import styled from 'styled-components';
+import { isBefore, isAfter } from 'date-fns';
 
 import { Contract } from './types/Contract';
 import LabeledInput from '../../ui/molecules/LabeledInput';
@@ -54,9 +55,13 @@ const ContractForm = ({ onSubmit, contract }: ContractFormProps) => {
     control,
     reset,
     formState: { errors },
+    watch,
   } = useForm<Inputs>({
     defaultValues: getInitialValues(contract),
   });
+
+  const periodStart = watch('periodStart');
+  const periodEnd = watch('periodEnd');
 
   useEffect(() => {
     if (contract) {
@@ -71,7 +76,7 @@ const ContractForm = ({ onSubmit, contract }: ContractFormProps) => {
         id="company"
         type="text"
         formHooks={register('company', {
-          required: true,
+          required: 'Company name is required',
         })}
         error={errors?.company?.message}
       />
@@ -80,7 +85,12 @@ const ContractForm = ({ onSubmit, contract }: ContractFormProps) => {
           name="periodStart"
           control={control}
           defaultValue={contract?.periodStart}
-          rules={{ required: true }}
+          rules={{
+            required: true,
+            validate: (value) =>
+              isBefore(value, periodEnd) ||
+              'Period start date needs to be before period end date',
+          }}
           render={({ field: { onChange, value, ...rest } }) => (
             <LabeledDatePicker
               label="Period start"
@@ -98,7 +108,12 @@ const ContractForm = ({ onSubmit, contract }: ContractFormProps) => {
           name="periodEnd"
           control={control}
           defaultValue={contract?.periodEnd}
-          rules={{ required: true }}
+          rules={{
+            required: true,
+            validate: (value) =>
+              isAfter(value, periodStart) ||
+              'Period end date needs to be after period start date',
+          }}
           render={({ field: { onChange, value, ...rest } }) => (
             <LabeledDatePicker
               label="Period end"
