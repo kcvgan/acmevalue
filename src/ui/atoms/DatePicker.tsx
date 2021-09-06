@@ -10,11 +10,14 @@ const DatePickerContainer = styled.div`
   width: 100%;
 `;
 
-type DatePickerProps = ReactDatePickerProps<any>;
+type DatePickerProps = ReactDatePickerProps<any> & { error?: string };
 
-const DatePicker = ({ ...datePickerProps }: DatePickerProps) => (
+const DatePicker = ({ error, ...datePickerProps }: DatePickerProps) => (
   <DatePickerContainer>
-    <ReactDatePicker {...datePickerProps} customInput={<Input />} />
+    <ReactDatePicker
+      {...datePickerProps}
+      customInput={<Input error={error} />}
+    />
   </DatePickerContainer>
 );
 

@@ -48,7 +48,13 @@ type Inputs = Omit<Contract, 'contractId'>;
 const ContractForm = ({ onSubmit, contract }: ContractFormProps) => {
   const returnToContracts = useRedirect(CONTRACTS_MAIN_ROUTE.path);
 
-  const { register, handleSubmit, control, reset } = useForm<Inputs>({
+  const {
+    register,
+    handleSubmit,
+    control,
+    reset,
+    formState: { errors },
+  } = useForm<Inputs>({
     defaultValues: getInitialValues(contract),
   });
 
@@ -64,7 +70,10 @@ const ContractForm = ({ onSubmit, contract }: ContractFormProps) => {
         label="Company"
         id="company"
         type="text"
-        formHooks={register('company', { required: true })}
+        formHooks={register('company', {
+          required: true,
+        })}
+        error={errors?.company?.message}
       />
       <FieldRow>
         <Controller
@@ -81,6 +90,7 @@ const ContractForm = ({ onSubmit, contract }: ContractFormProps) => {
               dateFormat="Pp"
               formHooks={rest}
               showTimeInput
+              error={errors?.periodStart?.message}
             />
           )}
         />
@@ -98,6 +108,7 @@ const ContractForm = ({ onSubmit, contract }: ContractFormProps) => {
               dateFormat="Pp"
               formHooks={rest}
               showTimeInput
+              error={errors?.periodEnd?.message}
             />
           )}
         />

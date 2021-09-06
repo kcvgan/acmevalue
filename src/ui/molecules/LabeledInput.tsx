@@ -14,17 +14,19 @@ type LabeledInputProps = {
   label: string;
   id: string;
   formHooks: UseFormRegisterReturn | ControllerRenderProps;
+  error?: string;
 } & ComponentProps<typeof Input>;
 
 const LabeledInput = ({
   label,
   id,
   formHooks,
+  error,
   ...props
 }: LabeledInputProps) => (
   <Container>
     <Label htmlFor={id}>{label}</Label>
-    <Input id={id} {...props} {...formHooks} />
+    <Input id={id} {...props} error={error} {...formHooks} />
   </Container>
 );
 
