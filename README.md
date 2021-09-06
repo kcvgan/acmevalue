@@ -1,25 +1,46 @@
-## AcmeValue
+# AcmeValue
 
-## Available Scripts
+This is an application to showcase architecture and implementation ideas given a particular business problem.
 
-In the project directory, you can run:
+## Quick start
 
-### `yarn start`
+Be sure to create an `.env` file and fill it with values under keys found in `.env.example`.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+In the terminal run:
+`yarn install && yarn start`
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+To start integration tests run:
+`yarn cypress`
 
-### `yarn test`
+## Libraries used
+#### Code standardization 
+* ESLint
+* Prettier
 
-Launches the test runner in the interactive watch mode.\
+Rationale: Prettier and ESlint work great together providing automatic code formatting and best practice rule enforcement.
+They are the industry standard for React application and for good reason.
 
-### `yarn build`
+#### Routing
+* React Router
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Rationale: A very simple and popular router that has modern React (hooks) support and a concise API.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### Style
+* Styled Components
+
+Rationale: CSS-in-JS is my preferred way of styling React applications.
+
+#### Input libraries
+* React Datepicker
+* React Hook Form
+
+Rationale: Working with dates is no easy task and React Datepicker is a neat, quite pretty, and most importantly simple to use solution to date inputs.
+React Hook Form, while not idiomatic to React principles, is a minimalistic, very performant, and easy to use form library.
+
+#### Testing
+* Cypress
+* Mock Service Worker
+* React Testing Library
+
+Rationale: Cypress is a very popular and effective tool that makes writing integration tests a breeze. MSW is also a great way to stub APIs
+and have consistent results when testing either integration or unit tests.
