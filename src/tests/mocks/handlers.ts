@@ -35,7 +35,7 @@ export const handlers = [
 
       contractsDB = contractsDB.map((c) => {
         if (c.contractId === contractId) {
-          return contract;
+          return { ...contract, contractId };
         }
 
         return c;
