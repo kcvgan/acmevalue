@@ -12,7 +12,7 @@ const StyledNav = styled.nav`
   width: 100%;
   height: 24px;
 
-  background-color: ${(props) => props.theme.colors.darkBlue};
+  background-color: ${(props) => props.theme.colors.blue.dark};
   color: ${(props) => props.theme.colors.textDark};
   font-size: ${({ theme }) => theme.fonts.size.medium};
   padding: ${({ theme }) => theme.spacing.xl};
@@ -25,7 +25,9 @@ type NavbarProps = {
 const Navbar = ({ routes }: NavbarProps) => (
   <StyledNav>
     {routes.map((route) => (
-      <UnstyledLink to={route.path}>{route.name}</UnstyledLink>
+      <UnstyledLink key={route.path} to={route.path}>
+        {route.name}
+      </UnstyledLink>
     ))}
   </StyledNav>
 );

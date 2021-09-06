@@ -10,7 +10,7 @@ export const Button = styled.button`
     css`
       ${theme.spacing.sm} ${theme.spacing.md}
     `};
-  font-size: ${({ theme }) => theme.font.size.regular}
+  font-size: ${({ theme }) => theme.fonts.size.regular}
 
   height: 44px;
 
