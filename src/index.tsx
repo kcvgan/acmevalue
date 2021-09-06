@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
 import AcmeValueApp from './application/AcmeValueApp';
 
 if (process.env.NODE_ENV === 'development') {
   // eslint-disable-next-line max-len
   // eslint-disable-next-line @typescript-eslint/no-var-requires,import/extensions,import/no-unresolved,global-require
-  const { worker } = require('./mocks/browser');
+  const { worker } = require('./tests/mocks/browser');
   worker.start();
 }
 
