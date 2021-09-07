@@ -1,46 +1,59 @@
-import { api } from '../../../infrastructure/services/axiosInstance';
+import httpClient from '../../../infrastructure/services/httpClient';
 import { Contract, ContractDTO } from '../types/Contract';
 
 const getDate = (dateString: string) => new Date(Date.parse(dateString));
 
-const DTOtoObj = (contractDTO: ContractDTO): Contract => ({
-  contractId: contractDTO.contractId,
-  company: contractDTO.company,
-  periodEnd: getDate(contractDTO.periodEnd),
-  periodStart: getDate(contractDTO.periodStart),
-  scheduledForRenewal: Boolean(contractDTO.scheduledForRenewal),
-  negotiationRenewalDate: getDate(contractDTO.negotiationRenewalDate),
-});
+const DTOtoObj = (contractDTO?: ContractDTO): Contract | null =>
+  contractDTO
+    ? {
+        contractId: contractDTO.contractId,
+        company: contractDTO.company,
+        periodEnd: getDate(contractDTO.periodEnd),
+        periodStart: getDate(contractDTO.periodStart),
+        scheduledForRenewal: Boolean(contractDTO.scheduledForRenewal),
+        negotiationRenewalDate: getDate(contractDTO.negotiationRenewalDate),
+      }
+    : null;
 
 const getContract = async (contractId: string) => {
-  const response = await api.get<{ contract: ContractDTO }>(
+  const { data } = await httpClient.get<{ contract: ContractDTO }>(
     `/contract/${contractId}`
   );
 
-  return DTOtoObj(response?.data?.contract);
+  return DTOtoObj(data?.contract);
 };
 
 const getContracts = async () => {
-  const response = await api.get<{ contracts: ContractDTO[] }>('/contracts');
+  const { data } = await httpClient.get<{ contracts: ContractDTO[] }>(
+    '/contracts'
+  );
 
-  return (response?.data?.contracts || []).map(DTOtoObj);
+  return (data?.contracts || []).filter(Boolean).map(DTOtoObj);
 };
 
 const createContract = async (newContract: Omit<Contract, 'contractId'>) => {
-  const response = await api.post('/contract', { contract: newContract });
+  const { data } = await httpClient.post<{ contract: ContractDTO }>(
+    '/contract',
+    {
+      contract: newContract,
+    }
+  );
 
-  return response.data.contract || null;
+  return DTOtoObj(data?.contract);
 };
 
 const updateContract = async (
   modifiedContract: Contract,
   contractId: string
 ) => {
-  const response = await api.patch(`/contract/${contractId}`, {
-    contract: modifiedContract,
-  });
+  const { data } = await httpClient.patch<{ contract: ContractDTO }>(
+    `/contract/${contractId}`,
+    {
+      contract: modifiedContract,
+    }
+  );
 
-  return response.data.contract || null;
+  return DTOtoObj(data?.contract);
 };
 
 const contractsService = {
