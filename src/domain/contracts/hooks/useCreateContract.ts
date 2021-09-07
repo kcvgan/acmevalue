@@ -1,6 +1,11 @@
-import { Contract } from '../types/Contract';
-import contractsService from '../api/contractsService';
+import { useDispatch } from 'react-redux';
 
-export const useCreateContract =
-  () => async (newContract: Omit<Contract, 'contractId'>) =>
-    contractsService.createContract(newContract);
+import { Contract } from '../types/Contract';
+import { addNewContract } from '../store/contractsSlice';
+
+export const useCreateContract = () => {
+  const dispatch = useDispatch();
+
+  return async (newContract: Omit<Contract, 'contractId'>) =>
+    dispatch(addNewContract(newContract));
+};
