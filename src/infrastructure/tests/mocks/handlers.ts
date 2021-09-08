@@ -4,9 +4,10 @@ import { Contract } from '@domain/contracts/types/Contract';
 import { contracts } from './data';
 
 let contractsDB = contracts;
+const baseURL = process.env.API_URL || 'http://localhost:3000';
 
 export const handlers = [
-  rest.get(`${process.env.API_URL}/contract/:contractId`, (req, res, ctx) => {
+  rest.get(`${baseURL}/contract/:contractId`, (req, res, ctx) => {
     const { contractId } = req.params;
 
     const contract =
@@ -19,7 +20,7 @@ export const handlers = [
     );
   }),
 
-  rest.get(`${process.env.API_URL}/contracts`, (req, res, ctx) =>
+  rest.get(`${baseURL}/contracts`, (req, res, ctx) =>
     res(
       ctx.json({
         contracts: contractsDB,
@@ -28,7 +29,7 @@ export const handlers = [
   ),
 
   rest.patch<{ contract: Contract }>(
-    `${process.env.API_URL}/contract/:contractId`,
+    `${baseURL}/contract/:contractId`,
     (req, res, ctx) => {
       const { contract } = req.body;
       const { contractId } = req.params;
@@ -67,22 +68,19 @@ export const handlers = [
     }
   ),
 
-  rest.post<{ contract: Contract }>(
-    `${process.env.API_URL}/contract`,
-    (req, res, ctx) => {
-      const { contract } = req.body;
+  rest.post<{ contract: Contract }>(`${baseURL}/contract`, (req, res, ctx) => {
+    const { contract } = req.body;
 
-      const createdContract = {
-        ...contract,
-        contractId: Date.now().toString(),
-      };
-      contractsDB = [...contractsDB, createdContract];
+    const createdContract = {
+      ...contract,
+      contractId: Date.now().toString(),
+    };
+    contractsDB = [...contractsDB, createdContract];
 
-      return res(
-        ctx.json({
-          contract: createdContract,
-        })
-      );
-    }
-  ),
+    return res(
+      ctx.json({
+        contract: createdContract,
+      })
+    );
+  }),
 ];

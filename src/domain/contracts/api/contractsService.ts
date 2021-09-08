@@ -35,7 +35,7 @@ const createContract = async (newContract: Omit<Contract, 'contractId'>) => {
 };
 
 const updateContract = async (
-  modifiedContract: Contract,
+  modifiedContract: Partial<Contract>,
   contractId: string
 ) => {
   const response = await api.patch<{ contract: ContractDTO }>(
