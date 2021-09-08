@@ -48,7 +48,7 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "craco eject",
-    "cypress": "cypress open"
+    "cypress": "./node_modules/.bin/cypress open"
   },
   "eslintConfig": {
     "extends": [
@@ -67,5 +67,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }
