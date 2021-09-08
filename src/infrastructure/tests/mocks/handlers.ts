@@ -1,7 +1,7 @@
 import { rest } from 'msw';
 
+import { Contract } from '@domain/contracts/types/Contract';
 import { contracts } from './data';
-import { Contract } from '../../../domain/contracts/types/Contract';
 
 let contractsDB = contracts;
 

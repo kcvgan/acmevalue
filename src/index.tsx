@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import AcmeValueApp from './application/AcmeValueApp';
+import AcmeValueApp from '@application/AcmeValueApp';
 
 if (process.env.NODE_ENV === 'development') {
   // eslint-disable-next-line max-len

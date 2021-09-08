@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-import ContractsRouter from '../../domain/contracts/ContractsRouter';
+import ContractsRouter from '@domain/contracts/ContractsRouter';
 
 const Container = styled.div`
   display: flex;
