@@ -6,7 +6,7 @@ import { contracts } from './data';
 let contractsDB = contracts;
 
 export const handlers = [
-  rest.get('/contract/:contractId', (req, res, ctx) => {
+  rest.get(`${process.env.API_URL}/contract/:contractId`, (req, res, ctx) => {
     const { contractId } = req.params;
 
     const contract =
@@ -19,7 +19,7 @@ export const handlers = [
     );
   }),
 
-  rest.get('/contracts', (req, res, ctx) =>
+  rest.get(`${process.env.API_URL}/contracts`, (req, res, ctx) =>
     res(
       ctx.json({
         contracts: contractsDB,
@@ -28,39 +28,61 @@ export const handlers = [
   ),
 
   rest.patch<{ contract: Contract }>(
-    '/contract/:contractId',
+    `${process.env.API_URL}/contract/:contractId`,
     (req, res, ctx) => {
       const { contract } = req.body;
       const { contractId } = req.params;
 
-      contractsDB = contractsDB.map((c) => {
-        if (c.contractId === contractId) {
-          return { ...contract, contractId };
-        }
+      const contractForModification = contractsDB.find(
+        (c) => c.contractId === contractId
+      );
 
-        return c;
-      });
+      if (contractForModification) {
+        const modifiedContract = {
+          ...contractForModification,
+          ...contract,
+          contractId,
+        };
+
+        contractsDB = contractsDB.map((c) => {
+          if (c.contractId === contractForModification.contractId) {
+            return modifiedContract;
+          }
+
+          return c;
+        });
+
+        return res(
+          ctx.json({
+            contract: modifiedContract,
+          })
+        );
+      }
 
       return res(
         ctx.json({
-          contract,
+          contract: null,
         })
       );
     }
   ),
 
-  rest.post<{ contract: Contract }>('/contract', (req, res, ctx) => {
-    const { contract } = req.body;
+  rest.post<{ contract: Contract }>(
+    `${process.env.API_URL}/contract`,
+    (req, res, ctx) => {
+      const { contract } = req.body;
 
-    contractsDB = [
-      ...contractsDB,
-      { ...contract, contractId: Date.now().toString() },
-    ];
+      const createdContract = {
+        ...contract,
+        contractId: Date.now().toString(),
+      };
+      contractsDB = [...contractsDB, createdContract];
 
-    return res(
-      ctx.json({
-        contract,
-      })
-    );
-  }),
+      return res(
+        ctx.json({
+          contract: createdContract,
+        })
+      );
+    }
+  ),
 ];
