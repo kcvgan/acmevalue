@@ -27,20 +27,25 @@ const getContracts = async () => {
 };
 
 const createContract = async (newContract: Omit<Contract, 'contractId'>) => {
-  const response = await api.post('/contract', { contract: newContract });
+  const response = await api.post<{ contract: ContractDTO }>('/contract', {
+    contract: newContract,
+  });
 
-  return response.data.contract || null;
+  return response.data.contract ? DTOtoObj(response.data.contract) : null;
 };
 
 const updateContract = async (
   modifiedContract: Contract,
   contractId: string
 ) => {
-  const response = await api.patch(`/contract/${contractId}`, {
-    contract: modifiedContract,
-  });
+  const response = await api.patch<{ contract: ContractDTO }>(
+    `/contract/${contractId}`,
+    {
+      contract: modifiedContract,
+    }
+  );
 
-  return response.data.contract || null;
+  return response.data.contract ? DTOtoObj(response.data.contract) : null;
 };
 
 const contractsService = {
