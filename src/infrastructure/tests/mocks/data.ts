@@ -1,4 +1,4 @@
-import { Contract } from '../../domain/contracts/types/Contract';
+import { Contract } from '@domain/contracts/types/Contract';
 
 const getDate = (dateString: string) => new Date(Date.parse(dateString));
 

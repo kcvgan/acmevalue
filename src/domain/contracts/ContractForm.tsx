@@ -3,13 +3,13 @@ import { Controller, useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { isBefore, isAfter } from 'date-fns';
 
+import LabeledInput from '@ui/molecules/LabeledInput';
+import LabeledDatePicker from '@ui/molecules/LabeledDatePicker';
+import { Button, SecondaryButton } from '@ui/atoms/Button';
+import Checkbox from '@ui/atoms/Checkbox';
+import useRedirect from '@infrastructure/utils/useRedirect';
+import { CONTRACTS_MAIN_ROUTE } from '@application/router/routes';
 import { Contract } from './types/Contract';
-import LabeledInput from '../../ui/molecules/LabeledInput';
-import LabeledDatePicker from '../../ui/molecules/LabeledDatePicker';
-import { Button, SecondaryButton } from '../../ui/atoms/Button';
-import Checkbox from '../../ui/atoms/Checkbox';
-import useRedirect from '../../infrastructure/utils/useRedirect';
-import { CONTRACTS_MAIN_ROUTE } from '../../application/router/routes';
 
 const FieldRow = styled.div`
   display: flex;

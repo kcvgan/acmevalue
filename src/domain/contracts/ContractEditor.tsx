@@ -1,14 +1,14 @@
 import React, { FC } from 'react';
 import { useParams } from 'react-router-dom';
 
+import useRedirect from '@infrastructure/utils/useRedirect';
+import UnstyledLink from '@ui/atoms/UnstyledLink';
+import Header from '@ui/atoms/Header';
 import { useGetContract } from './hooks/useGetContract';
 import ContractForm from './ContractForm';
 import { useUpdateContract } from './hooks/useUpdateContract';
 import { useCreateContract } from './hooks/useCreateContract';
 import { Contract } from './types/Contract';
-import UnstyledLink from '../../ui/atoms/UnstyledLink';
-import Header from '../../ui/atoms/Header';
-import useRedirect from '../../infrastructure/utils/useRedirect';
 
 const BreadcrumbHeader: FC = ({ children }) => (
   <Header>

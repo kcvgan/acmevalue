@@ -1,8 +1,8 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
+import ArrowButton from '@ui/molecules/ArrowButton';
 import { Contract } from './types/Contract';
-import ArrowButton from '../../ui/molecules/ArrowButton';
 
 const ScrollContainer = styled.div`
   overflow-x: scroll;

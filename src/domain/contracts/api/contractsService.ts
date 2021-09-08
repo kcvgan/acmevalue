@@ -1,4 +1,4 @@
-import { api } from '../../../infrastructure/services/axiosInstance';
+import { api } from '@infrastructure/services/axiosInstance';
 import { Contract, ContractDTO } from '../types/Contract';
 
 const getDate = (dateString: string) => new Date(Date.parse(dateString));
