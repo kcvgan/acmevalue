@@ -9,8 +9,11 @@ Be sure to create an `.env` file and fill it with values under keys found in `.e
 In the terminal run:
 `yarn install && yarn start`
 
-To start integration tests run:
+To start E2E tests run:
 `yarn cypress`
+
+To start integration tests run: 
+`yarn test`
 
 ## Libraries used
 #### Code standardization 

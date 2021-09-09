@@ -7,7 +7,7 @@
     "@reduxjs/toolkit": "^1.6.1",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
+    "@testing-library/user-event": "^13.2.1",
     "@types/react-datepicker": "^4.1.6",
     "axios": "^0.21.3",
     "date-fns": "^2.23.0",
@@ -23,6 +23,8 @@
     "web-vitals": "^1.0.1"
   },
   "devDependencies": {
+    "@testing-library/dom": "^8.3.0",
+    "@testing-library/react-hooks": "^7.0.2",
     "@types/jest": "^26.0.15",
     "@types/node": "^12.0.0",
     "@types/react": "^17.0.0",
@@ -72,5 +74,13 @@
   },
   "msw": {
     "workerDirectory": "public"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^@application(.*)$": "<rootDir>/src/application$1",
+      "^@domain(.*)$": "<rootDir>/src/domain$1",
+      "^@infrastructure(.*)$": "<rootDir>/src/infrastructure$1",
+      "^@ui(.*)$": "<rootDir>/src/ui$1"
+    }
   }
 }
