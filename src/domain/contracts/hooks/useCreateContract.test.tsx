@@ -2,6 +2,7 @@ import { renderHook } from '@testing-library/react-hooks';
 import { waitFor } from '@testing-library/dom';
 
 import { useCreateContract } from '@domain/contracts/hooks/useCreateContract';
+import { reduxWrapper } from '@infrastructure/tests/mocks/reduxWrapper';
 
 const mockNewContract = {
   company: 'Acme',
@@ -13,7 +14,9 @@ const mockNewContract = {
 
 describe('useCreateContract test suite', () => {
   it('Returns a properly created contract with a contractId', async () => {
-    const { result } = renderHook(() => useCreateContract());
+    const { result } = renderHook(() => useCreateContract(), {
+      wrapper: reduxWrapper,
+    });
 
     await waitFor(async () => {
       const createdContract = await result.current(mockNewContract);

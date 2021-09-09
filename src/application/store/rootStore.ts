@@ -6,4 +6,6 @@ export default configureStore({
   reducer: {
     contracts: contractsReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({ serializableCheck: false }),
 });

@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+
 import contractsService from '../api/contractsService';
 import { Contract } from '../types/Contract';
 
@@ -39,7 +40,7 @@ export const updateContract = createAsyncThunk(
     modifiedContract,
     contractId,
   }: {
-    modifiedContract: Contract;
+    modifiedContract: Partial<Contract>;
     contractId: string;
   }) => contractsService.updateContract(modifiedContract, contractId)
 );
@@ -80,7 +81,9 @@ const contractsSlice = createSlice({
         state.error = action.error.message || null;
       })
       .addCase(addNewContract.fulfilled, (state, action) => {
-        state.contracts.push(action.payload);
+        if (action.payload) {
+          state.contracts.push(action.payload);
+        }
       })
       .addCase(fetchContract.pending, (state) => {
         state.status = 'loading';

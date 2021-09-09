@@ -2,6 +2,7 @@ import { renderHook } from '@testing-library/react-hooks';
 import { waitFor } from '@testing-library/dom';
 
 import { useUpdateContract } from '@domain/contracts/hooks/useUpdateContract';
+import { reduxWrapper } from '@infrastructure/tests/mocks/reduxWrapper';
 
 const contractForModification = {
   contractId: '1234558',
@@ -28,7 +29,9 @@ const modifiedContract = {
 
 describe('useUpdateContract test suite', () => {
   it('Returns a modified contract with the same ID', async () => {
-    const { result } = renderHook(() => useUpdateContract());
+    const { result } = renderHook(() => useUpdateContract(), {
+      wrapper: reduxWrapper,
+    });
 
     await waitFor(async () => {
       const updatedContract = await result.current(
@@ -47,7 +50,9 @@ describe('useUpdateContract test suite', () => {
   });
 
   it('Returns a modified with old attributes and one modified', async () => {
-    const { result } = renderHook(() => useUpdateContract());
+    const { result } = renderHook(() => useUpdateContract(), {
+      wrapper: reduxWrapper,
+    });
 
     await waitFor(async () => {
       const updatedContract = await result.current(
